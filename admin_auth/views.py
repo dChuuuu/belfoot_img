@@ -16,7 +16,7 @@ def admin_authorization(request=None, user=None):
 
         return views.ImageConverterAPI().post(request=request)
 
-    return Response({"error": "authorization failed3"}, status.HTTP_403_FORBIDDEN)
+    return Response({"error": "authorization failed"}, status.HTTP_403_FORBIDDEN)
 
 
 class AdminAuthenticate(APIView):
@@ -34,7 +34,7 @@ class AdminAuthenticate(APIView):
             try:
                 login(request, user)
             except:
-                return Response({"error": "authorization failed2"}, status.HTTP_403_FORBIDDEN)
+                return Response({"error": "authorization failed"}, status.HTTP_403_FORBIDDEN)
 
 
             return admin_authorization(request=request, user=user)
@@ -43,6 +43,6 @@ class AdminAuthenticate(APIView):
         try:
             login(request, request.user)
         except:
-            return Response({"error": "authorization failed1"}, status.HTTP_403_FORBIDDEN)
+            return Response({"error": "authorization failed"}, status.HTTP_403_FORBIDDEN)
         else:
             return Response(status.HTTP_200_OK)
