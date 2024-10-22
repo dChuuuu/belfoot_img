@@ -13,6 +13,8 @@ from . import models
 import base64
 from io import BytesIO
 
+import os
+
 class ImageConverterAPI(APIView):
 
 
@@ -33,7 +35,7 @@ class ImageConverterAPI(APIView):
                 "image_id": f'{instance.image_id}',
                 "image": f'{instance.image}'}
 
-
+        os.remove(os.getcwd() + '\\img_converter\\temp\\image.jpeg')
 
         return Response(data={"image_data": data}, status=status.HTTP_200_OK)
 
