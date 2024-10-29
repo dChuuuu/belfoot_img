@@ -15,6 +15,8 @@ from io import BytesIO
 
 import os
 
+import random
+
 class ImageConverterAPI(APIView):
 
 
@@ -23,16 +25,19 @@ class ImageConverterAPI(APIView):
 
         url = request.data['data']['url']
         article_id = request.data['data']['article_id']
+        image_name = request.data['data']['image_name']
         response = requests.get(url).content
 
         image = converter.Converter().resolution_check(response)
         buffered = BytesIO()
         image.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue())
-        instance = models.Images(image=str(img_str.decode("utf-8")), article_id=article_id)
+
+
+
+        instance = models.Images(image=str(img_str.decode("utf-8")), article_id=article_id, image_name=image_name)
         instance.save()
-        data = {"article_id": f'{instance.article_id}',
-                "image_id": f'{instance.image_id}',
+        data = {"image_name": f'{instance.image_name}',
                 "image": f'{instance.image}'}
 
         os.remove(os.getcwd() + '/img_converter/temp/image.jpeg')
