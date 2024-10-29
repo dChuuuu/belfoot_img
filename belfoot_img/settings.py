@@ -32,7 +32,7 @@ try:
             'PORT': os.getenv('POST'),
         }
     }
-    SECRET_KEY = os.getenv('SECRET_KET')
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
 except:
     '''База данных для разработки. Указать свои настройки'''
@@ -50,10 +50,12 @@ except:
 
 
 # ДЕБАГ режим предназначен только для разработки. При проде выключить
-DEBUG = True
+DEBUG = False
+
+
 
 # Хосты, на которых можно поднять сервер
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Определение приложений

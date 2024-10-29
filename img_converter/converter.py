@@ -10,21 +10,21 @@ class Converter:
 
     def _size_check(self, image):
 
-        file_size = os.stat('img_converter/temp/image.jpeg').st_size / (1024 * 1024)
+        file_size = os.stat('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg').st_size / (1024 * 1024)
         quality = 95
         while file_size > 0.18:
-            image.save('img_converter/temp/image.jpeg', 'jpeg', optimize=True, quality=quality)
+            image.save('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg', 'jpeg', optimize=True, quality=quality)
             quality -= 5
-            file_size = os.stat('img_converter/temp/image.jpeg').st_size / (1024 * 1024)
+            file_size = os.stat('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg').st_size / (1024 * 1024)
 
         return image
 
 
     def resolution_check(self, response):
-        with open('img_converter/temp/image.jpeg', 'wb') as image:
+        with open('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg', 'wb') as image:
             image.write(response)
-        image = Image.open('img_converter/temp/image.jpeg')
-        file_size = os.stat('img_converter/temp/image.jpeg').st_size / (1024 * 1024)
+        image = Image.open('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg')
+        file_size = os.stat('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg').st_size / (1024 * 1024)
         width, height = image.size
         factor = width / height - 1
 
@@ -33,8 +33,8 @@ class Converter:
             resized_image = image.resize((int(width * factor), int(height * factor)))
             width, height = image.size
 
-            resized_image.save('img_converter/temp/image.jpeg', 'jpeg')
-            file_size = os.stat('img_converter/temp/image.jpeg').st_size / (1024 * 1024)
+            resized_image.save('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg', 'jpeg')
+            file_size = os.stat('/belfoot_photo/belfoot_img/img_converter/temp/image.jpeg').st_size / (1024 * 1024)
 
 
         return self._size_check(image)

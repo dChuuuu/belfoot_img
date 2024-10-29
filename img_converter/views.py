@@ -35,18 +35,18 @@ class ImageConverterAPI(APIView):
                 "image_id": f'{instance.image_id}',
                 "image": f'{instance.image}'}
 
-        os.remove(os.getcwd() + '\\img_converter\\temp\\image.jpeg')
+        os.remove(os.getcwd() + '/img_converter/temp/image.jpeg')
 
         return Response(data={"image_data": data}, status=status.HTTP_200_OK)
 
     def get(self, request):
         article_id = request.data['article_id']
         try:
-            instance = models.Images.objects.get(article_id=article_id)
-            data = {"article_id": f'{instance.article_id}',
+          instance = models.Images.objects.get(article_id=article_id)
+          data = {"article_id": f'{instance.article_id}',
                     "image_id": f'{instance.image_id}',
                     "image": f'{instance.image}'}
-            return Response(data={"image_data": data}, status=status.HTTP_200_OK)
+          return Response(data={"image_data": data}, status=status.HTTP_200_OK)
         except:
             return Response(data={"error": "not found"}, status=status.HTTP_404_NOT_FOUND)
 
